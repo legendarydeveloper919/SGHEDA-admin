@@ -26,6 +26,7 @@ const data = [
     createdAt: subDays(subHours(now, 7), 1).getTime(),
     email: 'carson.darrin@devias.io',
     name: 'Carson Darrin',
+    message: "I'm here to assist you 24/7",
     phone: '304-428-3097'
   },
   {
@@ -40,6 +41,7 @@ const data = [
     createdAt: subDays(subHours(now, 1), 2).getTime(),
     email: 'fran.perez@devias.io',
     name: 'Fran Perez',
+    message: "I'm here to assist you 24/7",
     phone: '712-351-5711'
   },
   {
@@ -54,6 +56,7 @@ const data = [
     createdAt: subDays(subHours(now, 4), 2).getTime(),
     email: 'jie.yan.song@devias.io',
     name: 'Jie Yan Song',
+    message: "I'm here to assist you 24/7",
     phone: '770-635-2682'
   },
   {
@@ -68,6 +71,7 @@ const data = [
     createdAt: subDays(subHours(now, 11), 2).getTime(),
     email: 'anika.visser@devias.io',
     name: 'Anika Visser',
+    message: "I'm here to assist you 24/7",
     phone: '908-691-3242'
   },
   {
@@ -82,6 +86,7 @@ const data = [
     createdAt: subDays(subHours(now, 7), 3).getTime(),
     email: 'miron.vitold@devias.io',
     name: 'Miron Vitold',
+    message: "I'm here to assist you 24/7",
     phone: '972-333-4106'
   },
   {
@@ -96,6 +101,7 @@ const data = [
     createdAt: subDays(subHours(now, 5), 4).getTime(),
     email: 'penjani.inyene@devias.io',
     name: 'Penjani Inyene',
+    message: "I'm here to assist you 24/7",
     phone: '858-602-3409'
   },
   {
@@ -110,6 +116,7 @@ const data = [
     createdAt: subDays(subHours(now, 15), 4).getTime(),
     email: 'omar.darobe@devias.io',
     name: 'Omar Darobe',
+    message: "I'm here to assist you 24/7",
     phone: '415-907-2647'
   },
   {
@@ -124,6 +131,7 @@ const data = [
     createdAt: subDays(subHours(now, 2), 5).getTime(),
     email: 'siegbert.gottfried@devias.io',
     name: 'Siegbert Gottfried',
+    message: "I'm here to assist you 24/7",
     phone: '702-661-1654'
   },
   {
@@ -138,6 +146,7 @@ const data = [
     createdAt: subDays(subHours(now, 8), 6).getTime(),
     email: 'iulia.albu@devias.io',
     name: 'Iulia Albu',
+    message: "I'm here to assist you 24/7",
     phone: '313-812-8947'
   },
   {
@@ -152,6 +161,7 @@ const data = [
     createdAt: subDays(subHours(now, 1), 9).getTime(),
     email: 'nasimiyu.danai@devias.io',
     name: 'Nasimiyu Danai',
+    message: "I'm here to assist you 24/7",
     phone: '801-301-7894'
   }
 ];
