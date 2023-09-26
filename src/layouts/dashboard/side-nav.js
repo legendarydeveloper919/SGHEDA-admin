@@ -121,12 +121,12 @@ export const SideNav = (props) => {
             py: 3,
           }}
         >
-          <Typography color="neutral.100" variant="subtitle2">
+          {/* <Typography color="neutral.100" variant="subtitle2">
             Need more features?
           </Typography>
           <Typography color="neutral.500" variant="body2">
             Check out our Pro solution template.
-          </Typography>
+          </Typography> */}
           <Box
             sx={{
               display: "flex",
@@ -140,7 +140,7 @@ export const SideNav = (props) => {
           >
             <img alt="Go to pro" src="/assets/devias-kit-pro.png" />
           </Box>
-          <Button
+          {/* <Button
             component="a"
             endIcon={
               <SvgIcon fontSize="small">
@@ -154,7 +154,7 @@ export const SideNav = (props) => {
             variant="contained"
           >
             Pro Live Preview
-          </Button>
+          </Button> */}
         </Box>
       </Box>
     </Scrollbar>

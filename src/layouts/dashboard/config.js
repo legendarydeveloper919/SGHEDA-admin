@@ -20,8 +20,8 @@ export const items = [
     ),
   },
   {
-    title: "Licensce",
-    path: "/licensce",
+    title: "License",
+    path: "/license",
     icon: (
       <SvgIcon fontSize="small">
         <ShoppingBagIcon />
@@ -37,67 +37,58 @@ export const items = [
       </SvgIcon>
     ),
   },
-  {
-    title: "Customers",
-    path: "/customers",
-    icon: (
-      <SvgIcon fontSize="small">
-        <UsersIcon />
-      </SvgIcon>
-    ),
-  },
-  {
-    title: "Companies",
-    path: "/companies",
-    icon: (
-      <SvgIcon fontSize="small">
-        <ShoppingBagIcon />
-      </SvgIcon>
-    ),
-  },
-  {
-    title: "Account",
-    path: "/account",
-    icon: (
-      <SvgIcon fontSize="small">
-        <UserIcon />
-      </SvgIcon>
-    ),
-  },
-  {
-    title: "Settings",
-    path: "/settings",
-    icon: (
-      <SvgIcon fontSize="small">
-        <CogIcon />
-      </SvgIcon>
-    ),
-  },
-  {
-    title: "Login",
-    path: "/auth/login",
-    icon: (
-      <SvgIcon fontSize="small">
-        <LockClosedIcon />
-      </SvgIcon>
-    ),
-  },
+  // {
+  //   title: "Companies",
+  //   path: "/companies",
+  //   icon: (
+  //     <SvgIcon fontSize="small">
+  //       <ShoppingBagIcon />
+  //     </SvgIcon>
+  //   ),
+  // },
+  // {
+  //   title: "Account",
+  //   path: "/account",
+  //   icon: (
+  //     <SvgIcon fontSize="small">
+  //       <UserIcon />
+  //     </SvgIcon>
+  //   ),
+  // },
+  // {
+  //   title: "Settings",
+  //   path: "/settings",
+  //   icon: (
+  //     <SvgIcon fontSize="small">
+  //       <CogIcon />
+  //     </SvgIcon>
+  //   ),
+  // },
+  // {
+  //   title: "Login",
+  //   path: "/auth/login",
+  //   icon: (
+  //     <SvgIcon fontSize="small">
+  //       <LockClosedIcon />
+  //     </SvgIcon>
+  //   ),
+  // },
   {
     title: "Register",
-    path: "/auth/register",
+    path: "/register",
     icon: (
       <SvgIcon fontSize="small">
         <UserPlusIcon />
       </SvgIcon>
     ),
   },
-  {
-    title: "Error",
-    path: "/404",
-    icon: (
-      <SvgIcon fontSize="small">
-        <XCircleIcon />
-      </SvgIcon>
-    ),
-  },
+  // {
+  //   title: "Error",
+  //   path: "/404",
+  //   icon: (
+  //     <SvgIcon fontSize="small">
+  //       <XCircleIcon />
+  //     </SvgIcon>
+  //   ),
+  // },
 ];

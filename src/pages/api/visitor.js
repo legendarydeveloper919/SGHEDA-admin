@@ -12,7 +12,7 @@ async function handler(req, res) {
       console.log("----- debug signin1 ------", ipAddress);
       const new_Visitor = new Visitors({
         address: req.body.name,
-        time: new Date.now(),
+        time: Date.now(),
       });
       new_Visitor.save();
       res.statusCode = 200;
@@ -24,7 +24,6 @@ async function handler(req, res) {
   }
   if (req.method === "GET") {
     const visitors = await Visitors.find();
-    console.log("----- debug signin2 ------", geo);
     res.statusCode = 200;
     res.json(visitors.length);
     console.log(visitors.length);

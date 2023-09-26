@@ -38,7 +38,7 @@ const style = {
   p: 4,
 };
 
-export const CustomersTable = (props) => {
+export const LicenseTable = (props) => {
   const [expandedRow, setExpandedRow] = useState(null);
   const [modalData, setModalData] = useState({
     name: "",
@@ -82,7 +82,7 @@ export const CustomersTable = (props) => {
           <Table>
             <TableHead>
               <TableRow className="">
-                <TableCell padding="checkbox">
+                {/* <TableCell padding="checkbox">
                   <Checkbox
                     checked={selectedAll}
                     indeterminate={selectedSome}
@@ -94,72 +94,85 @@ export const CustomersTable = (props) => {
                       }
                     }}
                   />
-                </TableCell>
+                </TableCell> */}
                 <TableCell>Name</TableCell>
                 <TableCell>Email</TableCell>
                 <TableCell>Country</TableCell>
-                <TableCell>Message</TableCell>
-                <TableCell>Purchase State</TableCell>
+                <TableCell>Machine Number</TableCell>
+                <TableCell>Price</TableCell>
+                <TableCell sx={{ textAlign: "center" }}>Purchase State</TableCell>
                 <TableCell></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {items.map((customer) => {
-                const isSelected = selected.includes(customer.id);
-                const createdAt = format(customer.createdAt, "dd/MM/yyyy");
+                const isSelected = selected.includes(customer._id);
+                const dateObj = new Date(customer.createdAt);
+
+                const createdAt = format(dateObj.getTime(), "dd/MM/yyyy");
 
                 return (
-                  <React.Fragment key={customer.id}>
-                    <TableRow hover key={customer.id} selected={isSelected}>
-                      <TableCell padding="checkbox">
+                  <React.Fragment key={customer._id}>
+                    <TableRow hover key={customer._id} selected={isSelected}>
+                      {/* <TableCell padding="checkbox">
                         <Checkbox
                           checked={isSelected}
                           onChange={(event) => {
                             if (event.target.checked) {
-                              onSelectOne?.(customer.id);
+                              onSelectOne?.(customer._id);
                             } else {
-                              onDeselectOne?.(customer.id);
+                              onDeselectOne?.(customer._id);
                             }
                           }}
                         />
-                      </TableCell>
+                      </TableCell> */}
                       <TableCell
                         onClick={() => {
-                          handleRowClick(customer.id);
+                          handleRowClick(customer._id);
                         }}
                       >
                         <Stack alignItems="center" direction="row" spacing={2}>
-                          <Avatar src={customer.avatar}>{getInitials(customer.name)}</Avatar>
+                          <Avatar src="/assets/avatars/avatar-cao-yu.png">
+                            {getInitials(customer.name)}
+                          </Avatar>
                           <Typography variant="subtitle2">{customer.name}</Typography>
                         </Stack>
                       </TableCell>
                       <TableCell
                         onClick={() => {
-                          handleRowClick(customer.id);
+                          handleRowClick(customer._id);
                         }}
                       >
                         {customer.email}
                       </TableCell>
                       <TableCell
                         onClick={() => {
-                          handleRowClick(customer.id);
+                          handleRowClick(customer._id);
                         }}
                       >
-                        {customer.address.country}
+                        {customer.country}
                       </TableCell>
                       <TableCell
                         onClick={() => {
-                          handleRowClick(customer.id);
+                          handleRowClick(customer._id);
                         }}
                       >
-                        {customer.message}
+                        {customer.machine_number}
                       </TableCell>
                       <TableCell
                         onClick={() => {
-                          handleRowClick(customer.id);
+                          handleRowClick(customer._id);
                         }}
                       >
-                        {customer.purchase_state}
+                        {customer.payment_history[customer.payment_history.length - 1]?.price}
+                      </TableCell>
+                      <TableCell
+                        sx={{ textAlign: "center" }}
+                        onClick={() => {
+                          handleRowClick(customer._id);
+                        }}
+                      >
+                        {customer.payment_history[customer.payment_history.length - 1]?.state}
                       </TableCell>
                       <TableCell>
                         <IconButton
@@ -179,7 +192,7 @@ export const CustomersTable = (props) => {
                           paddingTop: 0,
                         }}
                       >
-                        <Collapse in={expandedRow === customer.id} timeout="auto" unmountOnExit>
+                        <Collapse in={expandedRow === customer._id} timeout="auto" unmountOnExit>
                           <Typography>row.childData</Typography>
                         </Collapse>
                       </TableCell>
@@ -233,7 +246,7 @@ export const CustomersTable = (props) => {
   );
 };
 
-CustomersTable.propTypes = {
+LicenseTable.propTypes = {
   count: PropTypes.number,
   items: PropTypes.array,
   onDeselectAll: PropTypes.func,

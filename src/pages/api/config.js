@@ -14,7 +14,7 @@ async function handler(req, res) {
         });
         newconfig.save();
       }
-      await ConfigDatas.updateOne({}, { $inc: { downloaders: 1 } }, { upsert: true });
+      await ConfigDatas.updateOne({}, { $set: { auto_reply: req.body.value } }, { upsert: true });
       console.log("here");
       res.statusCode = 200;
       res.json({ status: "success" });
@@ -26,11 +26,11 @@ async function handler(req, res) {
   if (req.method === "GET") {
     try {
       const data = await ConfigDatas.findOne();
-      console.log(data.downloaders);
+      console.log(data.auto_reply);
       if (!data) {
         res.statusCode = 200;
-        res.json({ downloaders: 0 });
-      } else res.json(data.downloaders);
+        res.json({ auto_reply: true });
+      } else res.json(data.auto_reply);
     } catch (err) {
       console.log("error", err);
       res.status(500).send({ message: err.message });

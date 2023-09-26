@@ -2,18 +2,18 @@ import Head from "next/head";
 import { subDays, subHours } from "date-fns";
 import { Box, Container, Unstable_Grid2 as Grid } from "@mui/material";
 import { Layout as DashboardLayout } from "src/layouts/dashboard/layout";
-import { OverviewBudget } from "src/sections/overview/overview-budget";
+import { OverviewVisitors } from "src/sections/overview/overview-visitors";
 import { OverviewLatestOrders } from "src/sections/overview/overview-latest-orders";
 import { OverviewLatestProducts } from "src/sections/overview/overview-latest-products";
 import { OverviewSales } from "src/sections/overview/overview-sales";
-import { OverviewTasksProgress } from "src/sections/overview/overview-tasks-progress";
-import { OverviewTotalCustomers } from "src/sections/overview/overview-total-customers";
+import { OverviewBuyers } from "src/sections/overview/overview-buyer";
+import { OverviewDownloaders } from "src/sections/overview/overview-total-downloaders";
 import { OverviewTotalProfit } from "src/sections/overview/overview-total-profit";
-import { OverviewTraffic } from "src/sections/overview/overview-traffic";
+import { OverviewTraffic } from "src/sections/overview/overview-customers";
 
 const now = new Date();
 
-const Page = () => (
+const Page = (props) => (
   <>
     <Head>
       <title>Overview | Devias Kit</title>
@@ -28,21 +28,31 @@ const Page = () => (
       <Container maxWidth="xl">
         <Grid container spacing={3}>
           <Grid xs={12} sm={6} lg={3}>
-            <OverviewBudget difference={12} positive sx={{ height: "100%" }} value="$24k" />
-          </Grid>
-          <Grid xs={12} sm={6} lg={3}>
-            <OverviewTotalCustomers
-              difference={16}
-              positive={false}
+            <OverviewVisitors
+              difference={12}
+              positive
               sx={{ height: "100%" }}
-              value="1.6k"
+              value={props.visitor}
             />
           </Grid>
           <Grid xs={12} sm={6} lg={3}>
-            <OverviewTasksProgress sx={{ height: "100%" }} value={75.5} />
+            <OverviewDownloaders
+              difference={16}
+              positive={false}
+              sx={{ height: "100%" }}
+              value={props.downloaders}
+            />
           </Grid>
           <Grid xs={12} sm={6} lg={3}>
-            <OverviewTotalProfit sx={{ height: "100%" }} value="$15k" />
+            <OverviewBuyers
+              difference={25}
+              positive
+              sx={{ height: "100%" }}
+              value={props.customers}
+            />
+          </Grid>
+          <Grid xs={12} sm={6} lg={3}>
+            <OverviewTotalProfit difference={14} positive sx={{ height: "100%" }} value="31k" />
           </Grid>
           <Grid xs={12} lg={8}>
             <OverviewSales
@@ -61,8 +71,8 @@ const Page = () => (
           </Grid>
           <Grid xs={12} md={6} lg={4}>
             <OverviewTraffic
-              chartSeries={[63, 15, 22]}
-              labels={["Desktop", "Tablet", "Phone"]}
+              chartSeries={[53, 22, 15, 10]}
+              labels={["America", "Europe", "Asia", "Africa"]}
               sx={{ height: "100%" }}
             />
           </Grid>
@@ -179,3 +189,14 @@ const Page = () => (
 Page.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
 
 export default Page;
+export async function getServerSideProps(context) {
+  let res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_ADDRESS}/api/visitor`);
+  const visitor = await res.json();
+  res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_ADDRESS}/api/pay`);
+  const customers = await res.json();
+  res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_ADDRESS}/api/download`);
+  const downloaders = await res.json();
+  return {
+    props: { visitor: visitor, customers: customers.length, downloaders: downloaders },
+  };
+}

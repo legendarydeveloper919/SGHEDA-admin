@@ -2,10 +2,10 @@ import PropTypes from "prop-types";
 import ArrowDownIcon from "@heroicons/react/24/solid/ArrowDownIcon";
 import ArrowUpIcon from "@heroicons/react/24/solid/ArrowUpIcon";
 import UsersIcon from "@heroicons/react/24/solid/UsersIcon";
-import CurrencyDollarIcon from "@heroicons/react/24/solid/CurrencyDollarIcon";
+
 import { Avatar, Card, CardContent, Stack, SvgIcon, Typography } from "@mui/material";
 
-export const OverviewTotalProfit = (props) => {
+export const OverviewDownloaders = (props) => {
   const { difference, positive = false, sx, value } = props;
 
   return (
@@ -14,19 +14,19 @@ export const OverviewTotalProfit = (props) => {
         <Stack alignItems="flex-start" direction="row" justifyContent="space-between" spacing={3}>
           <Stack spacing={1}>
             <Typography color="text.secondary" variant="overline">
-              Total Profit
+              DOWNLOADERS
             </Typography>
             <Typography variant="h4">{value}</Typography>
           </Stack>
           <Avatar
             sx={{
-              backgroundColor: "primary.main",
+              backgroundColor: "success.main",
               height: 56,
               width: 56,
             }}
           >
             <SvgIcon>
-              <CurrencyDollarIcon />
+              <UsersIcon />
             </SvgIcon>
           </Avatar>
         </Stack>
@@ -50,7 +50,9 @@ export const OverviewTotalProfit = (props) => {
   );
 };
 
-OverviewTotalProfit.propTypes = {
-  value: PropTypes.string,
+OverviewDownloaders.propTypes = {
+  difference: PropTypes.number,
+  positive: PropTypes.bool,
+  value: PropTypes.string.isRequired,
   sx: PropTypes.object,
 };

@@ -22,6 +22,8 @@ import {
 import IconButton from "@mui/material/IconButton";
 import ReplyIcon from "@mui/icons-material/Reply";
 import SendIcon from "@mui/icons-material/Send";
+import DeleteIcon from "@mui/icons-material/Delete";
+import LockResetIcon from "@mui/icons-material/LockReset";
 import { Scrollbar } from "src/components/scrollbar";
 SendIcon;
 import { getInitials } from "src/utils/get-initials";
@@ -38,7 +40,7 @@ const style = {
   p: 4,
 };
 
-export const CustomersTable = (props) => {
+export const RegisterTable = (props) => {
   const [expandedRow, setExpandedRow] = useState(null);
   const [modalData, setModalData] = useState({
     name: "",
@@ -97,9 +99,8 @@ export const CustomersTable = (props) => {
                 </TableCell>
                 <TableCell>Name</TableCell>
                 <TableCell>Email</TableCell>
-                <TableCell>Country</TableCell>
-                <TableCell>Message</TableCell>
-                <TableCell>Purchase State</TableCell>
+                <TableCell>Password</TableCell>
+                <TableCell></TableCell>
                 <TableCell></TableCell>
               </TableRow>
             </TableHead>
@@ -123,51 +124,36 @@ export const CustomersTable = (props) => {
                           }}
                         />
                       </TableCell>
-                      <TableCell
-                        onClick={() => {
-                          handleRowClick(customer.id);
-                        }}
-                      >
+                      <TableCell>
                         <Stack alignItems="center" direction="row" spacing={2}>
-                          <Avatar src={customer.avatar}>{getInitials(customer.name)}</Avatar>
                           <Typography variant="subtitle2">{customer.name}</Typography>
                         </Stack>
                       </TableCell>
-                      <TableCell
-                        onClick={() => {
-                          handleRowClick(customer.id);
-                        }}
-                      >
-                        {customer.email}
-                      </TableCell>
-                      <TableCell
-                        onClick={() => {
-                          handleRowClick(customer.id);
-                        }}
-                      >
-                        {customer.address.country}
-                      </TableCell>
-                      <TableCell
+                      <TableCell>{customer.email}</TableCell>
+                      <TableCell>{customer.address.country}</TableCell>
+                      {/* <TableCell
                         onClick={() => {
                           handleRowClick(customer.id);
                         }}
                       >
                         {customer.message}
-                      </TableCell>
-                      <TableCell
-                        onClick={() => {
-                          handleRowClick(customer.id);
-                        }}
-                      >
-                        {customer.purchase_state}
-                      </TableCell>
+                      </TableCell> */}
                       <TableCell>
                         <IconButton
-                          aria-label="reply"
+                          aria-label="trash"
                           size="medium"
                           onClick={() => handleOpen(customer)}
                         >
-                          <ReplyIcon fontSize="inherit" />
+                          <LockResetIcon fontSize="inherit" />
+                        </IconButton>
+                      </TableCell>
+                      <TableCell>
+                        <IconButton
+                          aria-label="delete"
+                          size="medium"
+                          onClick={() => handleOpen(customer)}
+                        >
+                          <DeleteIcon fontSize="inherit" />
                         </IconButton>
                       </TableCell>
                     </TableRow>
@@ -233,7 +219,7 @@ export const CustomersTable = (props) => {
   );
 };
 
-CustomersTable.propTypes = {
+RegisterTable.propTypes = {
   count: PropTypes.number,
   items: PropTypes.array,
   onDeselectAll: PropTypes.func,

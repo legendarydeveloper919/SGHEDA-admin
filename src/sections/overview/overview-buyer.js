@@ -1,11 +1,21 @@
 import PropTypes from "prop-types";
-import ArrowDownIcon from "@heroicons/react/24/solid/ArrowDownIcon";
+import ListBulletIcon from "@heroicons/react/24/solid/ListBulletIcon";
+import ShoppingBagIcon from "@heroicons/react/24/solid/ShoppingBagIcon";
 import ArrowUpIcon from "@heroicons/react/24/solid/ArrowUpIcon";
-import UsersIcon from "@heroicons/react/24/solid/UsersIcon";
-import CurrencyDollarIcon from "@heroicons/react/24/solid/CurrencyDollarIcon";
-import { Avatar, Card, CardContent, Stack, SvgIcon, Typography } from "@mui/material";
+import ArrowDownIcon from "@heroicons/react/24/solid/ArrowUpIcon";
 
-export const OverviewTotalProfit = (props) => {
+import {
+  Avatar,
+  Box,
+  Card,
+  CardContent,
+  LinearProgress,
+  Stack,
+  SvgIcon,
+  Typography,
+} from "@mui/material";
+
+export const OverviewBuyers = (props) => {
   const { difference, positive = false, sx, value } = props;
 
   return (
@@ -13,20 +23,20 @@ export const OverviewTotalProfit = (props) => {
       <CardContent>
         <Stack alignItems="flex-start" direction="row" justifyContent="space-between" spacing={3}>
           <Stack spacing={1}>
-            <Typography color="text.secondary" variant="overline">
-              Total Profit
+            <Typography color="text.secondary" gutterBottom variant="overline">
+              BUYERS
             </Typography>
             <Typography variant="h4">{value}</Typography>
           </Stack>
           <Avatar
             sx={{
-              backgroundColor: "primary.main",
+              backgroundColor: "warning.main",
               height: 56,
               width: 56,
             }}
           >
             <SvgIcon>
-              <CurrencyDollarIcon />
+              <ShoppingBagIcon />
             </SvgIcon>
           </Avatar>
         </Stack>
@@ -45,12 +55,15 @@ export const OverviewTotalProfit = (props) => {
             </Typography>
           </Stack>
         )}
+        {/* <Box sx={{ mt: 3 }}>
+          <LinearProgress value={value} variant="determinate" />
+        </Box> */}
       </CardContent>
     </Card>
   );
 };
 
-OverviewTotalProfit.propTypes = {
-  value: PropTypes.string,
+OverviewBuyers.propTypes = {
+  value: PropTypes.number.isRequired,
   sx: PropTypes.object,
 };
