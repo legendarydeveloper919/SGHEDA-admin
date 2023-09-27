@@ -70,6 +70,9 @@ const Page = () => {
   const [modalData, setModalData] = useState({
     name: "",
   });
+  const [username, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const customers = useCustomers(page, rowsPerPage);
   console.log(customers);
@@ -89,12 +92,12 @@ const Page = () => {
   const handleClose = () => setOpen(false);
   const handleAdd = async () => {
     try {
-      let res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_ADDRESS}/api/addadmin`, {
+      let res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_ADDRESS}/api/manageadmin`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ value: event.target.checked }),
+        body: JSON.stringify({ username: username, email: email, password: password }),
       });
 
       if (!res.ok) {
@@ -170,12 +173,23 @@ const Page = () => {
                 </Typography>
                 <Stack spacing={2} style={{ marginTop: "5%" }}>
                   <TextField
+                    id="fullname_add"
+                    label="Name"
+                    multiline
+                    maxRows={4}
+                    variant="standard"
+                    onChange={(e) => setUserName(e.target.value)}
+                  />
+
+                  <TextField
                     id="outlined-multiline-flexible"
                     label="Email"
                     multiline
                     maxRows={4}
                     variant="standard"
+                    onChange={(e) => setEmail(e.target.value)}
                   />
+
                   <TextField
                     id="password-input"
                     label="Password"
@@ -184,6 +198,7 @@ const Page = () => {
                     variant="standard"
                     type="password"
                     autoComplete="current-password"
+                    onChange={(e) => setPassword(e.target.value)}
                   />
 
                   <Button

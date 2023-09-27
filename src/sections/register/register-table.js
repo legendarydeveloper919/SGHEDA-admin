@@ -20,14 +20,9 @@ import {
   Button,
 } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
-import ReplyIcon from "@mui/icons-material/Reply";
-import SendIcon from "@mui/icons-material/Send";
 import DeleteIcon from "@mui/icons-material/Delete";
 import LockResetIcon from "@mui/icons-material/LockReset";
 import { Scrollbar } from "src/components/scrollbar";
-SendIcon;
-import { getInitials } from "src/utils/get-initials";
-
 const style = {
   position: "absolute",
   top: "50%",
@@ -42,16 +37,25 @@ const style = {
 
 export const RegisterTable = (props) => {
   const [expandedRow, setExpandedRow] = useState(null);
-  const [modalData, setModalData] = useState({
+  const [reset_modalData, setResetModalData] = useState({
     name: "",
   });
-  const [open, setOpen] = useState(false);
-  const handleOpen = (data) => {
-    setModalData(data);
-    setOpen(true);
-  };
-  const handleClose = () => setOpen(false);
+  const [delete_modalData, setDeleteModalData] = useState({
+    name: "",
+  });
+  const [reset_open, setResetOpen] = useState(false);
+  const [delete_open, setDeleteOpen] = useState(false);
 
+  const handleResetOpen = (data) => {
+    setResetModalData(data);
+    setResetOpen(true);
+  };
+  const handleResetClose = () => setResetOpen(false);
+  const handleDeleteOpen = (data) => {
+    setDeleteModalData(data);
+    setDeleteOpen(true);
+  };
+  const handleDeleteClose = () => setDeleteOpen(false);
   const handleRowClick = (rowId) => {
     if (rowId === expandedRow) {
       setExpandedRow(null);
@@ -142,7 +146,7 @@ export const RegisterTable = (props) => {
                         <IconButton
                           aria-label="trash"
                           size="medium"
-                          onClick={() => handleOpen(customer)}
+                          onClick={() => handleResetOpen(customer)}
                         >
                           <LockResetIcon fontSize="inherit" />
                         </IconButton>
@@ -151,7 +155,7 @@ export const RegisterTable = (props) => {
                         <IconButton
                           aria-label="delete"
                           size="medium"
-                          onClick={() => handleOpen(customer)}
+                          onClick={() => handleDeleteOpen(customer)}
                         >
                           <DeleteIcon fontSize="inherit" />
                         </IconButton>
@@ -177,30 +181,68 @@ export const RegisterTable = (props) => {
           </Table>
         </Box>
         <Modal
-          open={open}
-          onClose={handleClose}
+          open={reset_open}
+          onClose={handleResetClose}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Reply to {modalData.name}
+            <Typography id="modal-modal-title" variant="h6" component="h2" textAlign={"center"}>
+              Do you want to reset password?
             </Typography>
-            <Stack spacing={2} style={{ marginTop: "5%" }}>
-              <TextField
-                id="outlined-multiline-flexible"
-                label="Multiline"
-                multiline
-                maxRows={4}
-                variant="standard"
-              />
+            <Stack spacing={2} style={{ marginTop: "10%" }} direction={"row"}>
               <Button
                 variant="contained"
                 size="small"
-                endIcon={<SendIcon />}
-                style={{ width: "100px", marginLeft: "auto" }}
+                color="error"
+                style={{
+                  width: "100px",
+                  margin: "auto",
+                }}
               >
-                Send
+                Confirm
+              </Button>
+              <Button
+                variant="contained"
+                size="small"
+                style={{ width: "100px", margin: "auto" }}
+                onClick={handleResetClose}
+              >
+                Cancel
+              </Button>
+            </Stack>
+          </Box>
+        </Modal>
+        <Modal
+          open={delete_open}
+          onClose={handleDeleteClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Typography id="modal-modal-title" variant="h6" component="h2" textAlign={"center"}>
+              Do you want to delete account?
+            </Typography>
+            <Stack spacing={2} style={{ marginTop: "10%" }} direction={"row"}>
+              <Button
+                variant="contained"
+                size="small"
+                color="error"
+                style={{
+                  width: "100px",
+                  margin: "auto",
+                }}
+                onClick={handleResetClose}
+              >
+                Confirm
+              </Button>
+              <Button
+                variant="contained"
+                size="small"
+                style={{ width: "100px", margin: "auto" }}
+                onClick={handleDeleteClose}
+              >
+                Cancel
               </Button>
             </Stack>
           </Box>
