@@ -5,3 +5,4 @@
 //   console.log("database connected");
 //   res.status(200).json({ message: "Database operation completed" });
 // }
+export const runtime = "edge";

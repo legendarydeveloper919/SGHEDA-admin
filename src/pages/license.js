@@ -133,3 +133,5 @@ export async function getServerSideProps(context) {
         props: { customers: customers, auto_reply: auto_reply },
     };
 }
+
+export const runtime = "edge";

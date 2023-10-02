@@ -218,7 +218,7 @@ const Page = (props) => {
                                 </Button>
                             </div> */}
                         </Stack>
-                        <CustomersSearch />
+                        {/* <CustomersSearch /> */}
                         <CustomersTable
                             count={feedback.length}
                             items={customers}
@@ -248,3 +248,5 @@ export async function getServerSideProps(context) {
     const feedback = await res.json();
     return { props: { feedback: feedback.feedbacks } };
 }
+
+export const runtime = "edge";

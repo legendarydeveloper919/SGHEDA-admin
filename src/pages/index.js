@@ -205,3 +205,5 @@ export async function getServerSideProps(context) {
         props: { visitor: visitor, customers: customers.length, downloaders: downloaders },
     };
 }
+
+export const runtime = "edge";

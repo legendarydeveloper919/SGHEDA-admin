@@ -36,3 +36,4 @@ async function handler(req, res) {
     }
 }
 export default corsMiddleware(handler);
+export const runtime = "edge";
