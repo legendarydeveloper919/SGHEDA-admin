@@ -1,6 +1,6 @@
 import dbConnect from "src/server/dbConnect";
 import Customers from "src/server/model/customer.model";
-import geoip from "geoip-lite";
+// import geoip from "geoip-lite";
 import corsMiddleware from "./cors";
 import ConfigDatas from "src/server/model/config_data";
 
@@ -89,7 +89,7 @@ async function handler(req, res) {
     if (req.method === "POST") {
         try {
             const ipAddress = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
-            const geo = geoip.lookup(ipAddress);
+            // const geo = geoip.lookup(ipAddress);
             console.log("----- debug signin1 ------", req.body.price);
             const new_Customer = new Customers({
                 name: req.body.name,
