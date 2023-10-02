@@ -12,4 +12,3 @@ const corsMiddleware = (handler) => (req, res) => {
 };
 
 export default corsMiddleware;
-export const runtime = "edge";

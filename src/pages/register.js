@@ -239,6 +239,7 @@ const Page = (props) => {
         </>
     );
 };
+
 Page.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
 
 export default Page;
@@ -250,5 +251,3 @@ export async function getServerSideProps(context) {
         props: { users: users },
     };
 }
-
-export const runtime = "edge";

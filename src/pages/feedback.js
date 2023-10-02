@@ -248,5 +248,3 @@ export async function getServerSideProps(context) {
     const feedback = await res.json();
     return { props: { feedback: feedback.feedbacks } };
 }
-
-export const runtime = "edge";

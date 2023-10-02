@@ -16,4 +16,3 @@ export default async function handler(req, res) {
         console.log("----- debug not get");
     }
 }
-export const runtime = "edge";
