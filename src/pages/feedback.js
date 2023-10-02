@@ -244,7 +244,7 @@ Page.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
 export default Page;
 
 export async function getServerSideProps(context) {
-    let res = await fetch(`/api/feedback`);
+    let res = await fetch(`https://sgheda-admin.vercel.app/api/feedback`);
     const feedback = await res.json();
     return { props: { feedback: feedback.feedbacks } };
 }

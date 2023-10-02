@@ -245,7 +245,7 @@ Page.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
 export default Page;
 
 export async function getServerSideProps(context) {
-    let res = await fetch(`/api/manageadmin`);
+    let res = await fetch(`https://sgheda-admin.vercel.app/api/manageadmin`);
     const users = await res.json();
     return {
         props: { users: users },
