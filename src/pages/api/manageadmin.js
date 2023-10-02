@@ -40,5 +40,32 @@ async function handler(req, res) {
             res.status(500).send({ message: err.message });
         }
     }
+    if (req.method === "PUT") {
+        try {
+            const default_password = await bcrypt.hash("123456", 12);
+            const data = await Users.findOneAndUpdate(
+                { _id: req.body._id },
+                {
+                    password: default_password,
+                },
+                { new: true }
+            );
+            res.statusCode = 200;
+            res.json(data);
+        } catch (err) {
+            console.log("error", err);
+            res.status(500).send({ message: err.message });
+        }
+    }
+    if (req.method === "DELETE") {
+        try {
+            const data = await Users.findOneAndDelete({ _id: req.body._id });
+            res.statusCode = 200;
+            res.json(data);
+        } catch (err) {
+            console.log("error", err);
+            res.status(500).send({ message: err.message });
+        }
+    }
 }
 export default corsMiddleware(handler);

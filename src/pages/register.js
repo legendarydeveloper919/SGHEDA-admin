@@ -39,7 +39,7 @@ const style = {
 const useCustomers = (data, page, rowsPerPage) => {
     return useMemo(() => {
         return applyPagination(data, page, rowsPerPage);
-    }, [page, rowsPerPage]);
+    }, [page, rowsPerPage, data]);
 };
 
 const useCustomerIds = (customers) => {
@@ -102,6 +102,40 @@ const Page = (props) => {
         // setChecked(event.target.checked);
     };
 
+    const handleDelete = (delete_id) => {
+        try {
+            let res = fetch("/api/manageadmin", {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ _id: delete_id }),
+            });
+
+            setUsers(users.filter((user) => user._id !== delete_id));
+            toast.success("Success.");
+        } catch (err) {
+            toast.error("Error occurred.");
+            console.error("Error on delete:", err);
+        }
+    };
+
+    const handleReset = (reset_id) => {
+        try {
+            let res = fetch("/api/manageadmin", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ _id: reset_id }),
+            });
+            toast.success("Success.");
+        } catch (err) {
+            toast.error("Error occurred.");
+            console.error("Error on reset:", err);
+        }
+    };
+
     return (
         <>
             <Head>
@@ -147,6 +181,8 @@ const Page = (props) => {
                             page={page}
                             rowsPerPage={rowsPerPage}
                             selected={customersSelection.selected}
+                            handleDelete={handleDelete}
+                            handleReset={handleReset}
                         />
                         <Modal
                             open={open}

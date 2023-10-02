@@ -38,10 +38,10 @@ const style = {
 export const RegisterTable = (props) => {
     const [expandedRow, setExpandedRow] = useState(null);
     const [reset_modalData, setResetModalData] = useState({
-        name: "",
+        _id: "",
     });
     const [delete_modalData, setDeleteModalData] = useState({
-        name: "",
+        _id: "",
     });
     const [reset_open, setResetOpen] = useState(false);
     const [delete_open, setDeleteOpen] = useState(false);
@@ -76,10 +76,14 @@ export const RegisterTable = (props) => {
         page = 0,
         rowsPerPage = 0,
         selected = [],
+        handleDelete,
+        handleReset,
     } = props;
 
     const selectedSome = selected.length > 0 && selected.length < items.length;
     const selectedAll = items.length > 0 && selected.length === items.length;
+
+    console.log("register table items", items);
 
     return (
         <Card>
@@ -140,19 +144,13 @@ export const RegisterTable = (props) => {
                                                 </Stack>
                                             </TableCell>
                                             <TableCell>{customer.email}</TableCell>
-                                            {/* <TableCell>{customer.address.country}</TableCell> */}
-                                            {/* <TableCell
-                        onClick={() => {
-                          handleRowClick(customer.id);
-                        }}
-                      >
-                        {customer.message}
-                      </TableCell> */}
                                             <TableCell>
                                                 <IconButton
                                                     aria-label="trash"
                                                     size="medium"
-                                                    onClick={() => handleResetOpen(customer)}
+                                                    onClick={() =>
+                                                        handleResetOpen({ _id: customer._id })
+                                                    }
                                                 >
                                                     <LockResetIcon fontSize="inherit" />
                                                 </IconButton>
@@ -161,7 +159,9 @@ export const RegisterTable = (props) => {
                                                 <IconButton
                                                     aria-label="delete"
                                                     size="medium"
-                                                    onClick={() => handleDeleteOpen(customer)}
+                                                    onClick={() =>
+                                                        handleDeleteOpen({ _id: customer._id })
+                                                    }
                                                 >
                                                     <DeleteIcon fontSize="inherit" />
                                                 </IconButton>
@@ -176,7 +176,7 @@ export const RegisterTable = (props) => {
                                                 }}
                                             >
                                                 <Collapse
-                                                    in={expandedRow === customer.id}
+                                                    in={expandedRow === customer._id}
                                                     timeout="auto"
                                                     unmountOnExit
                                                 >
@@ -213,6 +213,10 @@ export const RegisterTable = (props) => {
                                 style={{
                                     width: "100px",
                                     margin: "auto",
+                                }}
+                                onClick={() => {
+                                    handleReset(reset_modalData._id);
+                                    handleResetClose();
                                 }}
                             >
                                 Confirm
@@ -252,7 +256,10 @@ export const RegisterTable = (props) => {
                                     width: "100px",
                                     margin: "auto",
                                 }}
-                                onClick={handleResetClose}
+                                onClick={() => {
+                                    handleDelete(delete_modalData._id);
+                                    handleDeleteClose();
+                                }}
                             >
                                 Confirm
                             </Button>
