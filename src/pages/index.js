@@ -195,11 +195,11 @@ Page.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
 
 export default Page;
 export async function getServerSideProps(context) {
-    let res = await fetch(`https://sgheda-admin.vercel.app/api/visitor`);
+    let res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_ADDRESS}/api/visitor`);
     const visitor = await res.json();
-    res = await fetch(`https://sgheda-admin.vercel.app/api/pay`);
+    res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_ADDRESS}/api/pay`);
     const customers = await res.json();
-    res = await fetch(`https://sgheda-admin.vercel.app/api/download`);
+    res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_ADDRESS}/api/download`);
     const downloaders = await res.json();
     return {
         props: { visitor: visitor, customers: customers.length, downloaders: downloaders },
