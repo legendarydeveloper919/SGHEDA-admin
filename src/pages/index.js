@@ -195,11 +195,11 @@ Page.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
 
 export default Page;
 export async function getServerSideProps(context) {
-    let res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_ADDRESS}/api/visitor`);
+    let res = await fetch(`/api/visitor`);
     const visitor = await res.json();
-    res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_ADDRESS}/api/pay`);
+    res = await fetch(`/api/pay`);
     const customers = await res.json();
-    res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_ADDRESS}/api/download`);
+    res = await fetch(`/api/download`);
     const downloaders = await res.json();
     return {
         props: { visitor: visitor, customers: customers.length, downloaders: downloaders },

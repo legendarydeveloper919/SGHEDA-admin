@@ -244,7 +244,7 @@ Page.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
 export default Page;
 
 export async function getServerSideProps(context) {
-    let res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_ADDRESS}/api/feedback`);
+    let res = await fetch(`/api/feedback`);
     const feedback = await res.json();
     return { props: { feedback: feedback.feedbacks } };
 }

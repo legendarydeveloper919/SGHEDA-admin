@@ -245,7 +245,7 @@ Page.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
 export default Page;
 
 export async function getServerSideProps(context) {
-    let res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_ADDRESS}/api/manageadmin`);
+    let res = await fetch(`/api/manageadmin`);
     const users = await res.json();
     return {
         props: { users: users },
