@@ -195,13 +195,42 @@ Page.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
 
 export default Page;
 export async function getServerSideProps(context) {
-    let res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_ADDRESS}/api/visitor`);
-    const visitor = await res.json();
-    res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_ADDRESS}/api/pay`);
-    const customers = await res.json();
-    res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_ADDRESS}/api/download`);
-    const downloaders = await res.json();
-    return {
-        props: { visitor: visitor, customers: customers.length, downloaders: downloaders },
+    const fetchData = async (url) => {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 5000); // set timeout to 5 seconds
+
+        const res = await fetch(url, {
+            signal: controller.signal,
+        });
+
+        clearTimeout(timeoutId);
+
+        if (!res.ok) {
+            throw new Error(`Failed to fetch data from ${url}`);
+        }
+        return await res.json();
     };
+
+    try {
+        const visitor = await fetchData(`${process.env.NEXT_PUBLIC_SERVER_ADDRESS}/api/visitor`);
+        const customers = await fetchData(`${process.env.NEXT_PUBLIC_SERVER_ADDRESS}/api/pay`);
+        const downloaders = await fetchData(
+            `${process.env.NEXT_PUBLIC_SERVER_ADDRESS}/api/download`
+        );
+
+        return {
+            props: { visitor, customers: customers.length, downloaders },
+        };
+    } catch (error) {
+        console.error("A timeout or network error occurred.", error);
+
+        // Safely return some default props or throw an error to show error page
+        return {
+            props: {
+                visitor: undefined,
+                customers: undefined,
+                downloaders: undefined,
+            },
+        };
+    }
 }

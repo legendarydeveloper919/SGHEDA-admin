@@ -218,7 +218,7 @@ const Page = (props) => {
                                 </Button>
                             </div> */}
                         </Stack>
-                        {/* <CustomersSearch /> */}
+                        <CustomersSearch />
                         <CustomersTable
                             count={feedback.length}
                             items={customers}
@@ -243,8 +243,27 @@ Page.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
 
 export default Page;
 
-export async function getServerSideProps(context) {
-    let res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_ADDRESS}/api/feedback`);
-    const feedback = await res.json();
-    return { props: { feedback: feedback.feedbacks } };
+export async function getServerSideProps() {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000); // set timeout to 5 seconds
+
+    try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_ADDRESS}/api/feedback`, {
+            signal: controller.signal,
+        });
+
+        clearTimeout(timeoutId);
+
+        if (!response.ok) {
+            console.error(`Failed to fetch feedback: HTTP ${response.status}`);
+            return { props: { feedback: [] } }; // return empty feedback in case of failure
+        }
+
+        const data = await response.json();
+        return { props: { feedback: data.feedbacks } };
+    } catch (error) {
+        clearTimeout(timeoutId);
+        console.error(`Failed to fetch feedback: ${error.message}`);
+        return { props: { feedback: [] } }; // return empty feedback in case of failure
+    }
 }

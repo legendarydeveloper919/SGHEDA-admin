@@ -245,9 +245,26 @@ Page.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
 export default Page;
 
 export async function getServerSideProps(context) {
-    let res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_ADDRESS}/api/manageadmin`);
-    const users = await res.json();
-    return {
-        props: { users: users },
-    };
+    let controller = new AbortController();
+    let timeoutId = setTimeout(() => controller.abort(), 5000); // set timeout to 5 seconds
+
+    try {
+        let res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_ADDRESS}/api/manageadmin`, {
+            signal: controller.signal,
+        });
+        const users = await res.json();
+        clearTimeout(timeoutId);
+        return {
+            props: { users: users },
+        };
+    } catch (error) {
+        clearTimeout(timeoutId);
+        console.error("A timeout or network error occurred.", error);
+        // Safely return some default props or throw an error to show error page
+        return {
+            props: {
+                users: undefined,
+            },
+        };
+    }
 }
